@@ -1,0 +1,349 @@
+SPLUNK COMMANDS
+1 | P a g e
+abstract
+Description: Modify field values using a pattern or replacement.
+Example Input Query:
+your_search_here
+| abstract fieldname | table fieldname
+Example Output:
+| fieldname |
+|---------------|
+| value1 |
+| value2 |
+| value3 |
+accum
+Description: Accumulate values over time or events.
+Example Input Query:
+your_search_here | accum fieldname | table fieldname
+Example Output:
+| fieldname |
+|----------------------------|
+| value1 |
+| value1, value2 |
+| value1, value2, value3 |
+addcoltotals
+Description: Add column-wise totals to search results.
+Example Input Query:
+your_search_here | addcoltotals
+Example Output:
+| field1 | field2 | field3 |
+|---------|---------|---------|
+| value1 | value2 | value3 |
+| value4 | value5 | value6 |
+| Total | Total | Total |
+2 | P a g e
+addinfo
+Description: Append search information to each event.
+Example Input Query:
+your_search_here | addinfo | table _time, info
+Example Output:
+| _time | info |
+|---------------------|--------------------------|
+| 2023-06-01 10:00:00 | search_id=ABC, user=john |
+| 2023-06-01 11:00:00 | search_id=XYZ, user=mary |
+addtotals
+Description: Add total values for specific fields in search results.
+Example Input Query:
+your_search_here | addtotals field1 field2
+Example Output:
+| field1 | field2 |
+|--------|--------|
+| value1 | value2 |
+| value3 | value4 |
+| Total | Total |
+appendcols
+Description: Append fields from a subsearch to the main search results as new columns.
+Example Input Query:
+your_main_search_here | appendcols [your_subsearch_here]
+Example Output:
+| field1 | field2 | subfield1 | subfield2 |
+|--------|--------|-----------|-----------|
+| value1 | value2 | subvalue1 | subvalue2 |
+| value3 | value4 | subvalue3 | subvalue4 |
+3 | P a g e
+appendpipe
+Description: Append events from a subsearch to the main search results as new events.
+Example Input Query:
+your_main_search_here | appendpipe [your_subsearch_here]
+Example Output:
+| field1 | field2 |
+|--------|--------|
+| value1 | value2 |
+| value3 | value4 |
+| subvalue1 | subvalue2 |
+| subvalue3 | subvalue4 |
+arules
+Description: Perform association rule analysis on your search results.
+Example Input Query:
+your_search_here
+| arules [field1, field2] support=0.2 confidence=0.8
+Example Output:
+| antecedent | consequent | support | confidence |
+|----------------|------------|---------|------------|
+| {value1} | {value2} | 0.5 | 0.9 |
+| {value3} | {value4} | 0.3 | 0.7 |
+associate
+Description: Perform association analysis on your search results.
+Example Input Query:
+your_search_here | associate [field1, field2] support=0.2 confidence=0.8
+Example Output:
+| itemset | support | confidence |
+|----------------|---------|------------|
+| {value1} | 0.5 | 0.9 |
+| {value2} | 0.3 | 0.7 |
+4 | P a g e
+audit
+Description: Generate an audit trail of search activities.
+Example Input Query:
+your_search_here | audit action="search" info="Performed search activity."
+Example Output:
+Audit log entry created.
+autoregress
+Description: Create a time-series prediction using autoregressive modeling.
+Example Input Query:
+your_search_here | autoregress fieldname lag=3 predict=5
+Example Output:
+| _time | fieldname | predicted_fieldname |
+|---------------------|-----------|---------------------|
+| 2023-06-01 10:00:00 | value1 | prediction1 |
+| 2023-06-01 11:00:00 | value2 | prediction2 |
+bin (bucket)
+Description: Group numerical values into specified ranges or buckets.
+Example Input Query:
+your_search_here
+| bin fieldname span=10
+Example Output:
+| fieldname |
+|-----------|
+| 0-9 |
+| 10-19 |
+| 20-29 |
+bucketdir
+Description: Manage the Splunk bucket directory.
+Example Input Query:
+bucketdir [-sub] [options]
+Example Output:
+Bucket directory management results.
+5 | P a g e
+chart
+Description: Create visualizations such as line charts, bar charts, and pie charts.
+Example Input Query:
+your_search_here
+| chart count by fieldname
+Example Output:
+| fieldname | count |
+|-----------|-------|
+| value1 | 10 |
+| value2 | 20 |
+| value3 | 15 |
+cluster
+Description: Group events based on common attributes using machine learning clustering algorithms.
+Example Input Query:
+your_search_here
+| cluster fieldname
+Example Output:
+| fieldname | cluster |
+|-----------|---------|
+| value1 | 1 |
+| value2 | 2 |
+| value3 | 1 |
+cofilter
+Description: Combine search results using boolean logic.
+Example Input Query:
+your_search_here
+| cofilter condition1 [AND|OR] condition2
+Example Output:
+Combined search results.
+6 | P a g e
+collect
+Description: Accumulate events into a single event with multivalue fields.
+Example Input Query:
+your_search_here
+| collect fieldname
+Example Output:
+| fieldname |
+|-----------|
+| value1 |
+| value2 |
+| value3 |
+concurrency
+Description: Limit the number of concurrent searches.
+Example Input Query:
+your_search_here
+| concurrency max=5
+Example Output:
+Search results limited to maximum concurrency.
+contingency
+Description: Compute a contingency table to analyze associations between fields.
+Example Input Query:
+your_search_here
+| contingency field1 field2
+Example Output:
+| | field2_1 | field2_2 |
+|-----------|----------|----------|
+| field1_1 | 10 | 5 |
+| field1_2 | 3 | 8 |
+7 | P a g e
+convert
+Description: Convert fields into different formats or data types.
+Example Input Query:
+your_search_here
+| convert fieldname=strftime(_time, "%Y-%m-%d")
+Example Output:
+| fieldname |
+|--------------|
+| 2023-06-01 |
+| 2023-06-02 |
+| 2023-06-03 |
+correlate
+Description: Correlate events in one search with events in another search.
+Example Input Query:
+your_search1_here
+| correlate your_search2_here
+Example Output:
+Correlated search results.
+datamodel
+Description: Access and work with data models in Splunk.
+Example Input Query:
+datamodel your_datamodel_name [your_search_here]
+Example Output:
+Data model search results.
+dbinspect
+Description: Inspect a database connection to retrieve table and column information.
+Example Input Query:
+| dbinspect your_database_connection_name
+Example Output:
+| table_name | column_name |
+|------------|-------------|
+| table1 | column1 |
+| table1 | column2 |
+| table2 | column1 |
+8 | P a g e
+dedup
+Description: Remove duplicate events based on specified fields.
+Example Input Query:
+your_search_here
+| dedup fieldname
+Example Output:
+Deduplicated search results.
+delete
+Description: Delete events from the index.
+Example Input Query:
+delete [your_search_here]
+Example Output:
+Events deleted.
+delta
+Description: Compute the difference between consecutive numeric field values.
+Example Input Query:
+your_search_here
+| delta fieldname as difference
+Example Output:
+| fieldname | difference |
+|-----------|------------|
+| 10 | |
+| 15 | 5 |
+| 20 | 5 |
+diff
+Description: Compare two search results and return the differences.
+Example Input Query:
+your_search1_here
+| diff your_search2_here
+Example Output:
+Differences between search results.
+9 | P a g e
+erex
+Description: Extract fields using regular expressions.
+Example Input Query:
+your_search_here
+| erex fieldname=regex
+Example Output:
+| fieldname |
+|-----------|
+| value1 |
+| value2 |
+| value3 |
+eval
+Description: Create new calculated fields or modify existing fields.
+Example Input Query:
+your_search_here
+| eval new_fieldname = expression
+Example Output:
+| new_fieldname |
+|---------------|
+| value1 |
+| value2 |
+| value3 |
+eventcount
+Description: Count the number of events in the search results.
+Example Input Query:
+your_search_here
+| eventcount
+Example Output:
+| count |
+|-------|
+| 100 |
+10 | P a g e
+eventstats
+Description: Calculate statistics on numeric fields in the search results.
+Example Input Query:
+your_search_here
+| eventstats sum(fieldname) as total
+Example Output:
+| total |
+|-------|
+| 500 |
+extract (kv)
+Description: Extract key-value pairs from events using regular expressions.
+Example Input Query:
+your_search_here
+| extract kvdelim="=" fieldname
+Example Output:
+| fieldname1 | fieldname2 |
+|------------|------------|
+| value1 | value2 |
+| value3 | value4 |
+fieldformat
+Description: Modify the format of fields.
+Example Input Query:
+your_search_here
+| fieldformat fieldname1=lower(fieldname1)
+Example Output:
+Modified search results.
+fields
+Description: Restrict the search to specific fields.
+Example Input Query:
+your_search_here | fields fieldname1, fieldname2
+Example Output:
+| fieldname1 | fieldname2 |
+|------------|------------|
+| value1 | value2 |
+| value3 | value4 |
+11 | P a g e
+fieldsummary
+Description: Summarize field values and calculate statistics.
+Example Input Query:
+your_search_here
+| fieldsummary fieldname
+Example Output:
+| fieldname | count | distinct_count | min | max | avg |
+|-----------|-------|----------------|-------|-------|-------|
+| value1 | 100 | 10 | 1 | 50 | 25.5 |
+| value2 | 100 | 5 | A | E | - |
+filldown
+Description: Fill empty field values with the previous non-empty value.
+Example Input Query:
+your_search_here
+| filldown fieldname
+Example Output:
+Filled search results.
+fillnull
+Description: Replace null or empty field values with specified values.
+Example Input Query:
+your_search_here
+| fillnull value="N/A" fieldname
+Example Output:
+| fieldname |
+|-----------|
+| value1 |
+| N/A |
+| value2 |
